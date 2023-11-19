@@ -504,3 +504,12 @@ body {
     width: 100%;
   }
 }
+
+.c3-chart-arc text {
+  fill: #4b4b4b;
+}
+
+.c3-chart-arcs-title {
+  fill: #4b4b4b;
+  font-size: 1rem;
+}

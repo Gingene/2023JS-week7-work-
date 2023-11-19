@@ -17,16 +17,25 @@ const cantFindFrea = document.querySelector(".cantFind-area");
 
 // 傳入準備好的陣列資料渲染c3 donut
 // 陣列資料格式為 [["data1", 1], ["data2", 1], ["data3", 1]], 內陣列至少1個
-function c3Donut(dataArray) {
+function c3Donut(dataArray, keys) {
   const chart = c3.generate({
     bindto: "#chart",
     data: {
       columns: dataArray,
       type: "donut",
+      colors: {
+        台北: "#26C0C7",
+        台中: "#5151D3",
+        高雄: "#E68618",
+      },
+    },
+    donut: {
+      width: 25,
+      title: "套票地區比重",
     },
   });
 }
-
+// 套票地區比重
 // 傳入陣列並建立物件和地區陣列資列
 function c3Data(array) {
   const areaObj = {};
@@ -45,7 +54,7 @@ function c3Data(array) {
   // for (let area in areaObj) {
   //   areaResult.push([area, areaObj[area]]);
   // }
-  c3Donut(areaResult);
+  c3Donut(areaResult, areaProperties);
 }
 
 // 獲取資料即時渲染卡片和donut
@@ -53,7 +62,7 @@ function getData() {
   axios
     .get(url2)
     .then((res) => {
-      console.log(res);
+      // console.log(res.data);
       data = res.data.data;
       c3Data(data);
       rendnerDom(data);
